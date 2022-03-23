@@ -1,21 +1,24 @@
-php:
-  build: .
-  ports:
-    - "80:80"
-    - "443:443"
-  volumes:
-    - ./public:/var/www/html
-  links:
-    - db
-db:
-  image: mysql:8
-  ports:
-    - "3306:3306"
-  volumes:
-    - /var/lib/mysql
-  environment:
-    - MYSQL_DATABASE=db_app_db2
-    - MYSQL_ROOT_PASSWORD=123456
+#docker-compose up
+
+services:
+  php:
+    build: .
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./public:/var/www/html
+    links:
+      - db
+  db:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    volumes:
+      - /var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=db_app_db2
+      - MYSQL_ROOT_PASSWORD=123456
 
 # Backup:
 # docker exec CONTAINER /usr/bin/mysqldump -u root --password=root DATABASE > backup.sql
