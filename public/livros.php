@@ -7,6 +7,7 @@
             margin: auto;
         }
     </style>
+    
 </head>
 
 <html>
