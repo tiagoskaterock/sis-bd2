@@ -1,77 +1,95 @@
-<!DOCTYPE html>
+<?php
 
-<head>
-    <style>
-        .content {
-            max-width: 500px;
-            margin: auto;
-        }
-    </style>
-    
-</head>
+define('TITULO', 'Livros');
+include('includes/header.php');
 
-<html>
+?>
 
-<body>
-    <div class="content">
-        <h1>Bibliófilo's</h1>
+<?php
 
-        <h2>Livros</h2>
+$sql = "SELECT * FROM livros ORDER BY titulo";
+$result = $conn->query($sql);
+
+?>
+
+<div class="container">
+    <table class="table text-center table-striped table-bordered">
+        <thead class="bg-dark text-light">
+            <tr>
+            <th scope="col">Título</th>
+            <th scope="col">Classificação</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Biblioteca</th>
+            </tr>
+        </thead>
+        <tbody>
+
+    <?php
+
+    if ($result->num_rows > 0) {
+            
+    while($row = $result->fetch_assoc()) {
+      $autor_id = $row['autor_id'];
+      $biblioteca_id = $row['biblioteca_id'];
+        ?>        
+            <tr>
+                <td><?= $row['titulo'] ?></td>
+                <td><?= $row['classificacao'] ?></td>
+
+              <?php
+
+                $sql_class = "SELECT * FROM autores WHERE id = '$autor_id'";
+                $result_class = $conn->query($sql_class);
+
+                if ($result_class->num_rows > 0) {
+                  
+                  while($row_class = $result_class->fetch_assoc()) {
+                    $autor = $row_class['nome'];
+                  }
+                }
+
+                ?>
+
+                <td><?= $autor ?></td>
+
+                <?php
+
+                $sql_bib = "SELECT * FROM bibliotecas WHERE id = '$biblioteca_id'";
+                $result_bib = $conn->query($sql_bib);
+
+                if ($result_bib->num_rows > 0) {
+                  
+                  while($row_class = $result_bib->fetch_assoc()) {
+                    $biblioteca = $row_class['nome'];
+                  }
+                }
+
+                ?>
+
+
+                <td><?= $biblioteca ?></td>
+            </tr>        
         <?php
-        require 'mysql_server.php';
+    }
+    ?>
 
-        $conexao = RetornaConexao();
+        </tbody>
+    </table>
+</div>
+    <?php
+} 
+else {
+  ?>
+    <p class='text-center bg-warning p-3 container'>Nenhum Livro Cadastrado</p>
+  <?php
+}
 
-        $titulo = 'titulo';
-        $autor = 'autor';
-        $classificacao = 'classificacao';
-        /*TODO-1: Adicione uma variavel para cada coluna */
+$conn->close();
 
+?>
 
-        $sql =
-            'SELECT ' . $titulo .
-            '     , ' . $autor .
-            '     , ' . $classificacao .
-            /*TODO-2: Adicione cada variavel a consulta abaixo */
-            '  FROM livros';
+<?php
 
+include 'includes/footer.php';
 
-        $resultado = mysqli_query($conexao, $sql);
-        if (!$resultado) {
-            echo mysqli_error($conexao);
-        }
-
-
-
-        $cabecalho =
-            '<table>' .
-            '    <tr>' .
-            '        <th>' . $titulo . '</th>' .
-            '        <th>' . $autor . '</th>' .
-            /* TODO-3: Adicione as variaveis ao cabeçalho da tabela */
-            '        <th>' . $classificacao . '</th>' .
-            '    </tr>';
-
-        echo $cabecalho;
-
-        if (mysqli_num_rows($resultado) > 0) {
-
-            while ($registro = mysqli_fetch_assoc($resultado)) {
-                echo '<tr>';
-
-                echo '<td>' . $registro[$titulo] . '</td>' .
-                    '<td>' . $registro[$autor] . '</td>' .
-                    /* TODO-4: Adicione a tabela os novos registros. */
-                    '<td>' . $registro[$classificacao] . '</td>';
-                echo '</tr>';
-            }
-            echo '</table>';
-        } else {
-            echo '';
-        }
-        FecharConexao($conexao);
-        ?>
-    </div>
-</body>
-
-</html>
+?>
