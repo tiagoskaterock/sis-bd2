@@ -15,6 +15,7 @@ echo implode("<br>", array_map(function ($a) {
 }, $g));
 */
 
+define("TITULO", 'Home');
 
 ?>
 
