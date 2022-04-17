@@ -1,5 +1,7 @@
 <?php
 
+die();
+
 define('TITULO', 'Bibliotecas');
 include('includes/header.php');
 

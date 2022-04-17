@@ -36,7 +36,7 @@ include 'config.php';
                 <a class="nav-link <?php if(TITULO == 'Home'){ echo 'active'; }?>" aria-current="page" href=".">Home</a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item d-none">
                 <a class="nav-link <?php if(TITULO == 'Bibliotecas'){ echo 'active'; }?>" href="bibliotecas.php">Bibliotecas</a>
                 </li>
 
