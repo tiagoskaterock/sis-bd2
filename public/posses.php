@@ -1,6 +1,6 @@
 <?php
 
-define('TITULO', 'Leituras');
+define('TITULO', 'Posses');
 include('includes/header.php');
 
 ?>
@@ -10,21 +10,21 @@ include('includes/header.php');
         <thead class="bg-dark text-light">
             <tr>
             <th scope="col">Livro</th>
-            <th scope="col">Leitor</th>
+            <th scope="col">Dono</th>
             </tr>
         </thead>
         <tbody>
 
     <?php
 
-    $sql = "select leitores.nome as leitor, 
+    $sql = "select leitores.nome as dono, 
             livros.titulo as livro
             from leitores
-            join leituras
-            on leituras.leitor_id = leitores.id
+            join posses
+            on posses.leitor_id = leitores.id
             join livros
-            on leituras.livro_id = livros.id
-            order by livro, leitor;";
+            on posses.livro_id = livros.id
+            order by livro, dono";
 
     $result = $conn->query($sql);
 
@@ -34,7 +34,7 @@ include('includes/header.php');
         ?>        
             <tr>
                 <td><?= $row['livro'] ?></td>
-                <td><?= $row['leitor'] ?></td>
+                <td><?= $row['dono'] ?></td>
             </tr>        
         <?php
     }
@@ -47,7 +47,7 @@ include('includes/header.php');
 } 
 else {
   ?>
-    <p class='text-center bg-warning p-3 container'>Nenhuma Leitura Cadastrado</p>
+    <p class='text-center bg-warning p-3 container'>Nenhum Dono Cadastrado</p>
   <?php
 }
 

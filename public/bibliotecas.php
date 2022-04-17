@@ -55,7 +55,7 @@ $result = $conn->query($sql);
 } 
 else {
   ?>
-    <p class='text-center bg-warning p-3 container'>Nenhuma Biblioteca Cadastrada</p>
+    <p class='text-center bg-warning p-3 container'>Nenhuma Coleção Cadastrada</p>
   <?php
 }
 

@@ -55,6 +55,10 @@ include 'config.php';
                 <li class="nav-item">
                 <a class="nav-link <?php if(TITULO == 'Leituras'){ echo 'active'; }?>" href="leituras.php">Leituras</a>
                 </li>
+
+                <li class="nav-item">
+                <a class="nav-link <?php if(TITULO == 'Posses'){ echo 'active'; }?>" href="posses.php">Posses</a>
+                </li>
             </ul>
             </div>
         </div>

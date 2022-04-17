@@ -10,7 +10,8 @@ include('includes/header.php');
 $sql = "select livros.titulo as livro, autores.nome as autor
         from livros 
         join autores 
-        on livros.autor_id = autores.id";
+        on livros.autor_id = autores.id
+        order by livro";
 
 $result = $conn->query($sql);
 
@@ -22,6 +23,7 @@ $result = $conn->query($sql);
             <tr>
             <th scope="col">Título</th>
             <th scope="col">Autor</th>
+            <th scope="col">Leitores</th>
             </tr>
         </thead>
         <tbody>
@@ -35,6 +37,7 @@ $result = $conn->query($sql);
             <tr>
                 <td><?= $row['livro'] ?></td>
                 <td><?= $row['autor'] ?></td>
+                <td><?= '69' ?></td>
             </tr>        
         <?php
     }
